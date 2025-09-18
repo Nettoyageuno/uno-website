@@ -1,0 +1,592 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:root {
+  --uno-navy: #0B1220;
+  --uno-ink: #0F172A;
+  --uno-teal: #0891B2;
+  --uno-emerald: #10B981;
+  --uno-slate: #94A3B8;
+  --uno-card: #FFFFFF;
+  --uno-bg: #F7F7F4; /* warm neutral for some sections */
+}
+.btn-cta {
+  background-image: linear-gradient(90deg, var(--uno-teal), var(--uno-emerald));
+  color:#fff; border-radius: 0.75rem; font-weight:600;
+  transition: filter .22s ease, transform .22s ease;
+}
+.btn-cta:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.band-navy {
+  color:#fff;
+  background:
+    radial-gradient(1600px 800px at 10% 10%, rgba(8,145,178,.18), transparent),
+    var(--uno-navy);
+}
+.card { background: var(--uno-card); border: 1px solid rgba(15,23,42,.06); border-radius: 1rem; box-shadow: 0 8px 24px rgba(2,6,23,.04); }
+
+/* Motion (respects reduced motion) */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { opacity:0; transform: translateY(8px); transition: all .28s cubic-bezier(.22,1,.36,1); }
+  .reveal.show { opacity:1; transform:none; }
+  .hover-lift:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(2,6,23,.07); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal.show, .hover-lift:hover { transition:none !important; transform:none !important; }
+}
+
+/* === UNO Warm Sage — site palette ================================= */
+:root{
+  /* Core inks & surfaces */
+  --uno-ink:#0F172A;
+  --uno-card:#FFFFFF;
+
+  /* Warm Sage palette */
+  --uno-primary:#2FA36B;          /* buttons, links, accents */
+  --uno-primary-dark:#238457;     /* hovers, icons */
+  --uno-warm-50:#F3F6F2;          /* main warm background */
+  --uno-warm-100:#E9F1EB;         /* alternate warm background */
+  --uno-accent-1:#78C2A4;         /* secondary accent (mint-sage) */
+  --uno-deep:#1F3A5F;             /* deep band / header */
+  --uno-amber:#F59E0B;            /* secondary CTA */
+
+  /* Motion/lighting */
+  --uno-grad: linear-gradient(90deg, var(--uno-primary), var(--uno-accent-1));
+  --uno-grad-royal: linear-gradient(90deg, var(--uno-deep), var(--uno-primary));
+  --uno-bloom: rgba(47,163,107,.10);
+  --uno-shimmer:.02;
+  --uno-shadow:.06;
+}
+
+/* Body & links */
+html,body{ background:#fff; color:var(--uno-ink); }
+a{ color:var(--uno-deep); text-underline-offset:2px; }
+a:hover{ color:var(--uno-primary-dark); }
+
+/* Warm section helpers */
+.bg-warm{ background: var(--uno-warm-50); }
+.bg-warm-alt{ background: var(--uno-warm-100); }
+
+/* CTA buttons */
+.btn-cta{
+  background-image:var(--uno-grad);
+  color:#fff; border-radius:.75rem; font-weight:600;
+  transition: filter .22s ease, transform .22s ease, box-shadow .22s ease;
+  box-shadow: 0 8px 22px rgba(0,0,0,var(--uno-shadow));
+}
+.btn-cta:hover{ filter:brightness(1.06); transform:translateY(-1px); }
+
+.btn-cta-amber{
+  background: linear-gradient(90deg,var(--uno-amber),#FACC15);
+  color:#111827; border-radius:.75rem; font-weight:600;
+  transition: filter .22s ease, transform .22s ease, box-shadow .22s ease;
+  box-shadow:0 8px 18px rgba(245,158,11,.18);
+}
+.btn-cta-amber:hover{ filter:brightness(1.03); transform:translateY(-1px); }
+
+/* Hero / navy band with subtle warm blend at bottom */
+.band-navy{
+  color:#fff; position:relative; overflow:hidden;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0) 60%, var(--uno-warm-50) 120%),
+    radial-gradient(1600px 800px at 12% 10%, var(--uno-bloom), transparent 65%),
+    var(--uno-deep);
+}
+
+/* Headings underline uses new gradient */
+h2, .h2{ position:relative; }
+h2::after, .h2::after{
+  content:""; display:block; width:88px; height:3px; margin-top:.5rem; border-radius:9999px;
+  background: var(--uno-grad-royal); opacity:.9;
+}
+
+/* Checklists pick up sage */
+.uno-check-icon{ color: var(--uno-primary-dark); }
+
+/* Optional chip/badge defaults if present */
+.badge-emerald{ background:#DDF0E6; color:var(--uno-primary-dark); }
+
+/* Animation keyframes */
+@keyframes fadeInUp{
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Evergreen — harmonize tweaks */
+:root[data-theme="evergreen"]{
+  --uno-primary:#1E7F5B;        /* same family, a touch deeper */
+  --uno-primary-dark:#165C45;   /* darker for icons/links */
+  --uno-warm-50:#F2F5F2;        /* warmer neutral with a hint of green */
+  --uno-warm-100:#E7ECE8;       /* alt warm */
+  --uno-accent-1:#CFA961;       /* sand/ochre accent slightly warmer */
+  --uno-deep:#1B2632;           /* stone band */
+  --uno-grad:linear-gradient(90deg,#1E7F5B,#76A68C);
+  --uno-grad-royal:linear-gradient(90deg,#1B2632,#1E7F5B);
+  --uno-bloom:rgba(30,127,91,.13);
+  --uno-shimmer:.018;
+  --uno-shadow:.08;
+}
+
+/* Solid "stone" neutral for contrast sections */
+.bg-stone{ background:#F0F3F5; }
+
+/* Headline accent (slightly thicker, sand-tinted underline) */
+h2, .h2{ position:relative; }
+h2::after, .h2::after{
+  content:""; display:block; width:96px; height:4px; margin-top:.55rem; border-radius:9999px;
+  background: linear-gradient(90deg,var(--uno-accent-1), var(--uno-primary));
+  opacity:.9;
+}
+
+/* Buttons: subtle border + warmer shadow */
+.btn-cta{ box-shadow: 0 10px 26px rgba(30,127,91,.18); border:1px solid rgba(22,92,69,.18); }
+.btn-cta-amber{ box-shadow: 0 10px 22px rgba(207,169,97,.22); border:1px solid rgba(207,169,97,.28); }
+
+/* Cards: slightly warmer hairline */
+.card{ border-color: rgba(22,92,69,.08); }
+
+/* Checks & small icons adopt deeper evergreen */
+.uno-check-icon{ color: var(--uno-primary-dark); }
+
+/* === EVERGREEN GRADIENT THEME UTILITIES ======================= */
+:root{
+  --uno-ink:#0B1220;          /* deep navy-charcoal */
+  --uno-forest:#0F2E26;       /* evergreen */
+  --uno-emerald-400:#34D399;
+  --uno-emerald-500:#10B981;
+  --uno-emerald-700:#047857;
+  --uno-mint-50:#EDF7F3;
+  --uno-card:#0F172A;         /* slate-900-ish for dark surfaces */
+  --uno-ring:#1F2937;         /* gray-800 outline */
+}
+
+/* Gradient surfaces */
+.uno-hero {
+  position: relative;
+  background: radial-gradient(1200px 600px at 70% 120%, rgba(16,185,129,.15) 0%, rgba(16,185,129,0) 55%),
+              linear-gradient(180deg, var(--uno-ink) 0%, var(--uno-forest) 100%);
+  border-radius: 1.25rem; /* 2xl */
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+.uno-hero--soft {
+  background: radial-gradient(900px 450px at 80% 120%, rgba(16,185,129,.12) 0%, rgba(16,185,129,0) 55%),
+              linear-gradient(180deg, var(--uno-ink) 0%, var(--uno-forest) 100%);
+}
+.uno-cta {
+  position: relative;
+  background: linear-gradient(180deg, var(--uno-ink) 0%, var(--uno-forest) 100%);
+  border-radius: 1rem; /* xl */
+  box-shadow: 0 16px 40px rgba(0,0,0,.30);
+}
+
+/* Subtle noise overlay */
+.uno-noise::after {
+  content:"";
+  position:absolute; inset:0; pointer-events:none; border-radius:inherit;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/ filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Dark surface panel, used sparingly */
+.uno-surface {
+  background: linear-gradient(180deg, rgba(15,23,42,.9), rgba(15,23,42,.75));
+  border-radius: 1rem;
+  border: 1px solid var(--uno-ring);
+  backdrop-filter: blur(4px);
+}
+
+/* Accent chips/icons */
+.uno-chip {
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.375rem .625rem; border-radius:.625rem;
+  background: rgba(16,185,129,.12);
+  color: #C7F9E9;
+  border: 1px solid rgba(52,211,153,.25);
+}
+
+/* Buttons */
+.btn-uno {
+  background: var(--uno-emerald-500); color:#08130F;
+}
+.btn-uno:hover { background: var(--uno-emerald-400); }
+
+/* Light mint section background helper (optional) */
+.bg-mint-50 { background: var(--uno-mint-50); }
+
+:root{
+  /* Radius scale */
+  --uno-radius-sm: 8px;
+  --uno-radius-md: 12px;
+  --uno-radius-lg: 16px;
+  --uno-radius-xl: 20px;
+  --uno-radius-2xl: 24px;
+  --uno-radius-pill: 9999px;
+
+  /* Soft shadow */
+  --uno-shadow: 0 8px 24px rgba(2,6,23,.06);
+}
+
+/* Site-wide rounded styling is scoped under .rounded-site (added in App.tsx) */
+.rounded-site section:not(.no-round),
+.rounded-site aside:not(.no-round),
+.rounded-site .uno-hero,
+.rounded-site .uno-cta,
+.rounded-site .uno-surface,
+.rounded-site .soft-panel,
+.rounded-site .card,
+.rounded-site .panel {
+  border-radius: var(--uno-radius-xl);
+  overflow: hidden; /* keeps backgrounds and images clipped to radius */
+}
+
+/* Cards / white panels / subtle backgrounds */
+.rounded-site .bg-white,
+.rounded-site .bg-gray-50,
+.rounded-site .bg-mint-50,
+.rounded-site .border,
+.rounded-site .shadow {
+  border-radius: var(--uno-radius-lg);
+  box-shadow: var(--uno-shadow);
+}
+
+/* Form elements */
+.rounded-site input,
+.rounded-site select,
+.rounded-site textarea,
+.rounded-site .btn,
+.rounded-site button {
+  border-radius: var(--uno-radius-md);
+}
+
+/* Chips/badges (including our eco/feature chips) */
+.rounded-site .badge,
+.rounded-site .chip,
+.rounded-site .uno-chip {
+  border-radius: var(--uno-radius-pill);
+}
+
+/* Media */
+.rounded-site img,
+.rounded-site video,
+.rounded-site .image,
+.rounded-site .image-placeholder {
+  border-radius: var(--uno-radius-lg);
+  object-fit: cover;
+}
+
+/* Tables and lists that are boxed */
+.rounded-site table {
+  border-radius: var(--uno-radius-md);
+  overflow: hidden;
+}
+
+/* Header/footer containers (when they have visible boxes) */
+.rounded-site header .container,
+.rounded-site footer .container {
+  border-radius: var(--uno-radius-xl);
+}
+
+/* Opt-out helper: add class="no-round" on any element to keep it square */
+
+:root{
+  /* Radius scale */
+  --uno-radius-sm: 8px;
+  --uno-radius-md: 12px;
+  --uno-radius-lg: 16px;
+  --uno-radius-xl: 20px;
+  --uno-radius-2xl: 24px;
+  --uno-radius-pill: 9999px;
+
+  /* Soft shadow */
+  --uno-shadow: 0 8px 24px rgba(2,6,23,.06);
+}
+
+/* Site-wide rounded styling is scoped under .rounded-site (added in App.tsx) */
+.rounded-site section:not(.no-round),
+.rounded-site aside:not(.no-round),
+.rounded-site .uno-hero,
+.rounded-site .uno-cta,
+.rounded-site .uno-surface,
+.rounded-site .soft-panel,
+.rounded-site .card,
+.rounded-site .panel {
+  border-radius: var(--uno-radius-xl);
+  overflow: hidden; /* keeps backgrounds and images clipped to radius */
+}
+
+/* Cards / white panels / subtle backgrounds */
+.rounded-site .bg-white,
+.rounded-site .bg-gray-50,
+.rounded-site .bg-mint-50,
+.rounded-site .border,
+.rounded-site .shadow {
+  border-radius: var(--uno-radius-lg);
+  box-shadow: var(--uno-shadow);
+}
+
+/* Form elements */
+.rounded-site input,
+.rounded-site select,
+.rounded-site textarea,
+.rounded-site .btn,
+.rounded-site button {
+  border-radius: var(--uno-radius-md);
+}
+
+/* Chips/badges (including our eco/feature chips) */
+.rounded-site .badge,
+.rounded-site .chip,
+.rounded-site .uno-chip {
+  border-radius: var(--uno-radius-pill);
+}
+
+/* Media */
+.rounded-site img,
+.rounded-site video,
+.rounded-site .image,
+.rounded-site .image-placeholder {
+  border-radius: var(--uno-radius-lg);
+  object-fit: cover;
+}
+
+/* Tables and lists that are boxed */
+.rounded-site table {
+  border-radius: var(--uno-radius-md);
+  overflow: hidden;
+}
+
+/* Header/footer containers (when they have visible boxes) */
+.rounded-site header .container,
+.rounded-site footer .container {
+  border-radius: var(--uno-radius-xl);
+}
+
+/* Opt-out helper: add class="no-round" on any element to keep it square */
+/* ========= UNO THEME TOKENS (multi-palette) ======================= */
+/* Base fallbacks (Option A by default) */
+:root{
+  --uno-ink:#0F172A; --uno-card:#FFFFFF;
+  --uno-primary:#2FA36B; --uno-primary-dark:#238457;
+  --uno-warm-50:#F3F6F2; --uno-warm-100:#E9F1EB;
+  --uno-accent-1:#78C2A4; --uno-deep:#1F3A5F; --uno-amber:#F59E0B;
+  --uno-grad:linear-gradient(90deg,var(--uno-primary),var(--uno-accent-1));
+  --uno-grad-royal:linear-gradient(90deg,var(--uno-deep),var(--uno-primary));
+  --uno-bloom:rgba(47,163,107,.10); --uno-shadow:.06;
+}
+
+/* Palettes mapped to data-theme on <html> */
+/* A) Warm Sage (default) */
+:root[data-theme="sage"]{
+  --uno-primary:#2FA36B; --uno-primary-dark:#238457;
+  --uno-warm-50:#F3F6F2; --uno-warm-100:#E9F1EB;
+  --uno-accent-1:#78C2A4; --uno-deep:#1F3A5F; --uno-amber:#F59E0B;
+  --uno-grad:linear-gradient(90deg,#2FA36B,#78C2A4);
+  --uno-grad-royal:linear-gradient(90deg,#1F3A5F,#2FA36B);
+  --uno-bloom:rgba(47,163,107,.10);
+}
+
+/* B) French Blue + Pine */
+:root[data-theme="french"]{
+  --uno-primary:#2A6FDB; --uno-primary-dark:#1F58B0;
+  --uno-warm-50:#FAF7F2; --uno-warm-100:#F3F0EA;
+  --uno-accent-1:#1C6B4C; --uno-deep:#0F172A; --uno-amber:#F59E0B;
+  --uno-grad:linear-gradient(90deg,#2A6FDB,#1C6B4C);
+  --uno-grad-royal:linear-gradient(90deg,#0F172A,#2A6FDB);
+  --uno-bloom:rgba(42,111,219,.10);
+}
+
+/* C) Mineral Teal + Lime (industrial) */
+:root[data-theme="teal"]{
+  --uno-primary:#0F9BA8; --uno-primary-dark:#0A7D87;
+  --uno-warm-50:#F5F8F9; --uno-warm-100:#ECF3F4;
+  --uno-accent-1:#84CC16; --uno-deep:#111827; --uno-amber:#F59E0B;
+  --uno-grad:linear-gradient(90deg,#0F9BA8,#84CC16);
+  --uno-grad-royal:linear-gradient(90deg,#111827,#0F9BA8);
+  --uno-bloom:rgba(15,155,168,.10);
+}
+
+/* D) Evergreen + Sand */
+:root[data-theme="evergreen"]{
+  --uno-primary:#1E7F5B; --uno-primary-dark:#17664A;
+  --uno-warm-50:#F3F6F2; --uno-warm-100:#E8EEE9;
+  --uno-accent-1:#D6A756; --uno-deep:#1B2632; --uno-amber:#D6A756;
+  --uno-grad:linear-gradient(90deg,#1E7F5B,#76A68C);
+  --uno-grad-royal:linear-gradient(90deg,#1B2632,#1E7F5B);
+  --uno-bloom:rgba(30,127,91,.10);
+}
+
+/* E) Indigo + Sky + Mint */
+:root[data-theme="indigo"]{
+  --uno-primary:#4F46E5; --uno-primary-dark:#4338CA;
+  --uno-warm-50:#F6F7FB; --uno-warm-100:#EEF2FA;
+  --uno-accent-1:#0EA5E9; --uno-deep:#0B1220; --uno-amber:#F59E0B;
+  --uno-grad:linear-gradient(90deg,#4F46E5,#0EA5E9);
+  --uno-grad-royal:linear-gradient(90deg,#0B1220,#4F46E5);
+  --uno-bloom:rgba(79,70,229,.10);
+}
+
+/* F) Charcoal + Terracotta + Sage */
+:root[data-theme="terracotta"]{
+  --uno-primary:#2C2C2C; --uno-primary-dark:#1F1F1F;
+  --uno-warm-50:#F7F3F0; --uno-warm-100:#EFE7E3;
+  --uno-accent-1:#76BFA2; --uno-deep:#1F2A37; --uno-amber:#D97157;
+  --uno-grad:linear-gradient(90deg,#2C2C2C,#76BFA2);
+  --uno-grad-royal:linear-gradient(90deg,#1F2A37,#2C2C2C);
+  --uno-bloom:rgba(217,113,87,.08);
+}
+
+/* Helpers already used across the site (keep) */
+.bg-warm{ background: var(--uno-warm-50); }
+.bg-warm-alt{ background: var(--uno-warm-100); }
+.btn-cta{ background-image:var(--uno-grad); color:#fff; border-radius:.75rem; font-weight:600; transition:.2s; }
+.btn-cta:hover{ filter:brightness(1.06); transform:translateY(-1px); }
+.btn-cta-amber{ background:linear-gradient(90deg,var(--uno-amber),#FACC15); color:#111827; border-radius:.75rem; font-weight:600; transition:.2s; }
+.band-navy{
+  color:#fff; position:relative; overflow:hidden;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0) 60%, var(--uno-warm-50) 120%),
+    radial-gradient(1600px 800px at 12% 10%, var(--uno-bloom), transparent 65%),
+    var(--uno-deep);
+}
+.uno-check-icon{ color: var(--uno-primary-dark); }
+
+/* Checklist alignment utility — use without changing texts */
+.uno-checklist { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 0.75rem 1.5rem; }
+@media (max-width: 767px){ .uno-checklist { grid-template-columns: 1fr; } }
+.uno-checklist li { display:flex; align-items:flex-start; gap:.5rem; }
+.uno-check-icon { margin-top: 2px; height:20px; width:20px; color: #059669; } /* emerald-600 */
+
+/* GetQuote page utilities */
+.input-card { @apply rounded-xl border border-emerald-900/15 bg-white/90 backdrop-blur p-4 shadow-sm hover:shadow-md transition-all; }
+.input-label { @apply block text-sm font-medium text-gray-800 mb-1; }
+.input-control { @apply w-full rounded-lg border-gray-300 focus:border-emerald-600 focus:ring-emerald-600; }
+.field-grid { @apply grid grid-cols-1 sm:grid-cols-2 gap-4; }
+.help-text { @apply text-xs text-gray-500 mt-1; }
+.badge-note { @apply inline-flex items-center rounded-md bg-emerald-50 px-2 py-0.5 text-[11px] font-medium text-emerald-700; }
+
+/* Enhanced theme with warmth and motion */
+:root{
+  --uno-navy:#0B1220;
+  --uno-ink:#0F172A;
+  --uno-teal:#0891B2;
+  --uno-emerald:#10B981;
+  --uno-royal:#1E3A8A;
+  --uno-amber:#F59E0B;
+  --uno-slate:#94A3B8;
+  --uno-card:#FFFFFF;
+  --uno-bg:#F7F7F4; /* warm neutral */
+  --uno-grad: linear-gradient(90deg, var(--uno-teal), var(--uno-emerald));
+  --uno-grad-royal: linear-gradient(90deg, var(--uno-royal), var(--uno-teal));
+  --uno-soft: radial-gradient(1200px 600px at 8% 12%, rgba(8,145,178,.12), transparent 60%);
+}
+
+html,body{ color:var(--uno-ink); background:#fff; }
+a{ color:var(--uno-royal); text-underline-offset:2px; }
+a:hover{ text-decoration:underline; }
+
+/* CTA gradient button */
+.btn-cta{
+  background-image:var(--uno-grad);
+  color:#fff; border-radius:0.75rem; font-weight:600;
+  transition: filter .22s ease, transform .22s ease, box-shadow .22s ease;
+  box-shadow: 0 8px 22px rgba(16,185,129,.18);
+}
+.btn-cta:hover{ filter:brightness(1.07); transform:translateY(-1px); box-shadow: 0 14px 28px rgba(8,145,178,.22); }
+
+/* Navy bands with subtle teal bloom & shimmer */
+.band-navy{
+  color:#fff; position:relative; overflow:hidden;
+  background:
+    radial-gradient(1600px 800px at 12% 10%, rgba(8,145,178,.18), transparent 65%),
+    var(--uno-navy);
+}
+@media (prefers-reduced-motion:no-preference){
+  .band-navy::after{
+    content:""; position:absolute; inset:0;
+    background: radial-gradient(600px 300px at 20% 20%, rgba(255,255,255,.04), transparent 60%);
+    animation:uno-shimmer 8s linear infinite; pointer-events:none;
+  }
+  @keyframes uno-shimmer{
+    0%{ transform: translateX(-10%); opacity:.7; }
+    50%{ transform: translateX(8%); opacity:.3; }
+    100%{ transform: translateX(-10%); opacity:.7; }
+  }
+}
+
+/* Cards: soft gradient halo on hover */
+.card{
+  background:var(--uno-card);
+  border:1px solid rgba(15,23,42,.06);
+  border-radius:1rem;
+  box-shadow:0 8px 24px rgba(2,6,23,.04);
+  position:relative;
+}
+@media (prefers-reduced-motion:no-preference){
+  .card::before{
+    content:""; position:absolute; inset:-1px; border-radius:inherit; z-index:0;
+    background:linear-gradient(180deg, rgba(8,145,178,.22), rgba(16,185,129,.16));
+    opacity:0; transition:opacity .25s ease;
+  }
+  .card:hover::before{ opacity:1; }
+}
+
+/* Section headings: gradient underline accent */
+h2, .h2{ position:relative; }
+h2::after, .h2::after{
+  content:""; display:block; width:88px; height:3px; margin-top:.5rem; border-radius:9999px;
+  background: var(--uno-grad-royal); opacity:.9;
+}
+
+/* Simple reveal on-load (no JS). Applies when you add class="reveal" */
+@media (prefers-reduced-motion:no-preference){
+  @keyframes uno-fade-up{ from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
+  .reveal{ animation: uno-fade-up .28s cubic-bezier(.22,1,.36,1) both; }
+}
+@media (prefers-reduced-motion:reduce){ .reveal{ animation:none; } }
+
+/* Optional soft background wash to apply via class only */
+.bg-soft{ background: var(--uno-soft); }
+
+/* Warm neutrals */
+:root{
+  /* add warm neutrals */
+  --uno-warm-50:#FAF7F2;
+  --uno-warm-75:#F6F2EC;
+  --uno-warm-100:#F2ECE3;
+  --uno-warm-200:#EAE3D7;
+}
+
+/* Solid warm section backgrounds */
+.bg-warm{ background: var(--uno-warm-50); }
+.bg-warm-alt{ background: var(--uno-warm-100); }
+
+/* Optional thin warm divider */
+.divider-warm{ height:1px; background: rgba(149,115,85,.15); }
+
+/* Amber CTA (secondary) */
+.btn-cta-amber{
+  background: linear-gradient(90deg,#F59E0B,#FACC15);
+  color:#111827; border-radius:.75rem; font-weight:600;
+  transition: filter .22s ease, transform .22s ease, box-shadow .22s ease;
+  box-shadow:0 8px 18px rgba(245,158,11,.18);
+}
+.btn-cta-amber:hover{ filter:brightness(1.03); transform:translateY(-1px); }
+
+/* Slightly warmer hero band (keeps navy but blends to warm at bottom) */
+.band-navy{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0) 60%, rgba(250,247,242,.65) 120%),
+    radial-gradient(1600px 800px at 12% 10%, var(--uno-bloom, rgba(8,145,178,.12)), transparent 65%),
+    var(--uno-navy, #0B1220);
+}
